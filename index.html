@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vvichelae Stays &amp; Suites | Serviced Apartments • Short-Let Living</title>
+    <meta
+      name="description"
+      content="Vvichelae Stays & Suites offers serviced apartments and short-let living in Lagos, Nigeria. Explore stays across Yaba, Ikeja, Lekki, Surulere, Victoria Island, and Ikoyi."
+    />
+    <meta
+      property="og:title"
+      content="Vvichelae Stays & Suites | Serviced Apartments • Short-Let Living"
+    />
+    <meta
+      property="og:description"
+      content="Feel at Home, Wherever Life Takes You. Serviced apartments and short-let living across Lagos, Nigeria."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Static hidden forms for Netlify build-time form detection -->
+    <form name="vvichelae-booking" netlify netlify-honeypot="bot-field" hidden aria-hidden="true">
+      <input type="text" name="bot-field" />
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="apartment" />
+      <input type="text" name="location" />
+      <input type="date" name="arrivalDate" />
+      <input type="date" name="departureDate" />
+      <input type="number" name="guests" />
+      <input type="text" name="nights" />
+      <input type="text" name="pricePerNight" />
+      <input type="text" name="estimatedTotal" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <form name="vvichelae-contact" netlify netlify-honeypot="bot-field" hidden aria-hidden="true">
+      <input type="text" name="bot-field" />
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

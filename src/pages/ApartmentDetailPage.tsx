@@ -22,7 +22,7 @@ export function ApartmentDetailPage({ slug, onNavigate }: ApartmentDetailPagePro
             Apartment Not Found
           </h1>
           <p className="text-base text-[#34483D]/80 mb-8">
-            The residence you requested could not be found. Browse all six Vvichelae apartments in Lagos below.
+            The residence you requested could not be found. Browse our collection of Vvichelae residences in Lagos below.
           </p>
           <button
             type="button"

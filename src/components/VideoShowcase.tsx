@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { Film, Pause, Play } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Film, Pause, Play, Volume2, VolumeX } from 'lucide-react';
 import { SafeImage } from './SafeImage';
 
 interface PreviewFrame {
@@ -8,6 +8,7 @@ interface PreviewFrame {
 }
 
 interface VideoShowcaseProps {
+  label?: string;
   heading: string;
   subheading: string;
   videoSrc: string;
@@ -18,6 +19,7 @@ interface VideoShowcaseProps {
 }
 
 export function VideoShowcase({
+  label = 'Apartment Walkthrough',
   heading,
   subheading,
   videoSrc,
@@ -29,37 +31,82 @@ export function VideoShowcase({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [hasStarted, setHasStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [videoMissing, setVideoMissing] = useState(false);
   const [selectedFrameIndex, setSelectedFrameIndex] = useState(0);
 
   const isOlive = surface === 'olive';
 
+  // Reset state if videoSrc changes
+  useEffect(() => {
+    setHasStarted(false);
+    setIsPlaying(false);
+    setVideoMissing(false);
+  }, [videoSrc]);
+
+  const checkVideoReachable = async (): Promise<boolean> => {
+    // Only pre-check same-origin paths so Vite SPA fallback (200 text/html) is caught cleanly
+    if (!videoSrc.startsWith('/')) {
+      return true;
+    }
+    try {
+      const response = await fetch(videoSrc, { method: 'HEAD' });
+      const contentType = response.headers.get('content-type') || '';
+      if (!response.ok || contentType.includes('text/html')) {
+        return false;
+      }
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   const handlePlayAttempt = async () => {
-    setHasStarted(true);
     const videoEl = videoRef.current;
     if (!videoEl) return;
 
+    const reachable = await checkVideoReachable();
+    if (!reachable) {
+      setHasStarted(false);
+      setIsPlaying(false);
+      setVideoMissing(true);
+      return;
+    }
+
     try {
       await videoEl.play();
+      setHasStarted(true);
       setIsPlaying(true);
     } catch {
-      // Missing local file or browser decode error triggers onError / state
-      if (videoEl.error || videoEl.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+      if (
+        videoEl.error ||
+        videoEl.networkState === HTMLMediaElement.NETWORK_NO_SOURCE ||
+        videoEl.readyState === HTMLMediaElement.HAVE_NOTHING
+      ) {
+        setHasStarted(false);
         setVideoMissing(true);
       }
       setIsPlaying(false);
     }
   };
 
-  const handleTogglePlay = () => {
+  const handleTogglePlay = async () => {
     const videoEl = videoRef.current;
     if (!videoEl || videoMissing) return;
     if (videoEl.paused) {
-      void handlePlayAttempt();
+      await handlePlayAttempt();
     } else {
       videoEl.pause();
       setIsPlaying(false);
     }
+  };
+
+  const handleToggleMute = () => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+    const nextMuted = !videoEl.muted;
+    videoEl.muted = nextMuted;
+    setIsMuted(nextMuted);
   };
 
   return (
@@ -71,9 +118,9 @@ export function VideoShowcase({
       }
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mb-10">
-          <p className="text-xs font-semibold tracking-wider uppercase text-[#B9785C] mb-3">
-            Apartment Walkthrough
+        <div className="max-w-3xl mb-10">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#B9785C] mb-3">
+            {label}
           </p>
           <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-balance">
             {heading}
@@ -93,20 +140,27 @@ export function VideoShowcase({
             <>
               <video
                 ref={videoRef}
+                src={videoSrc}
                 className="w-full h-full object-cover"
                 poster={posterSrc}
                 controls={hasStarted}
+                muted={isMuted}
+                loop
                 playsInline
                 preload="metadata"
-                onPlay={() => setIsPlaying(true)}
+                onPlaying={() => {
+                  setHasStarted(true);
+                  setIsPlaying(true);
+                }}
                 onPause={() => setIsPlaying(false)}
                 onError={() => {
                   if (hasStarted) {
+                    setHasStarted(false);
+                    setIsPlaying(false);
                     setVideoMissing(true);
                   }
                 }}
               >
-                <source src={videoSrc} type="video/mp4" />
                 Your browser does not support embedded video playback.
               </video>
 
@@ -135,14 +189,38 @@ export function VideoShowcase({
               )}
 
               {hasStarted && (
-                <button
-                  type="button"
-                  onClick={handleTogglePlay}
-                  aria-label={isPlaying ? 'Pause video' : 'Play video'}
-                  className="sr-only"
-                >
-                  {isPlaying ? 'Pause' : 'Play'}
-                </button>
+                <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+                  <button
+                    type="button"
+                    onClick={() => void handleTogglePlay()}
+                    aria-label={isPlaying ? 'Pause walkthrough video' : 'Play walkthrough video'}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#34483D]/85 text-[#F3EDE2] border border-[#F3EDE2]/25 hover:border-[#B9785C] text-xs font-medium cursor-pointer"
+                  >
+                    {isPlaying ? (
+                      <>
+                        <Pause className="w-3.5 h-3.5" aria-hidden="true" />
+                        <span>Pause</span>
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
+                        <span>Play</span>
+                      </>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleToggleMute}
+                    aria-label={isMuted ? 'Unmute walkthrough video' : 'Mute walkthrough video'}
+                    className="inline-flex items-center justify-center p-1.5 bg-[#34483D]/85 text-[#F3EDE2] border border-[#F3EDE2]/25 hover:border-[#B9785C] cursor-pointer"
+                  >
+                    {isMuted ? (
+                      <VolumeX className="w-3.5 h-3.5" aria-hidden="true" />
+                    ) : (
+                      <Volume2 className="w-3.5 h-3.5" aria-hidden="true" />
+                    )}
+                  </button>
+                </div>
               )}
             </>
           ) : (
@@ -208,6 +286,7 @@ export function VideoShowcase({
               onClick={() => {
                 setVideoMissing(false);
                 setHasStarted(false);
+                setIsPlaying(false);
               }}
               className="inline-flex items-center gap-1 underline underline-offset-4 cursor-pointer self-start sm:self-auto"
             >

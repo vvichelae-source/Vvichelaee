@@ -28,6 +28,42 @@ const GUEST_OPTIONS = [
   { label: '6 guests', value: '6' },
 ];
 
+const APARTMENTS_PAGE_COVERS: Record<
+  string,
+  { src: string; alt: string; objectPosition?: string }
+> = {
+  'studio-yaba': {
+    src: '/assets/aistudio/Modern_Open-Plan_Living_Room___Kitchen_Design_a00eb874.jpg',
+    alt: 'Studio Apartment in Yaba, Lagos open plan living and kitchen area with grey sectional sofa and marble coffee table',
+    objectPosition: 'object-[center_58%]',
+  },
+  'one-bedroom-ikeja': {
+    src: '/assets/aistudio/download__3__0919e2d3.jpg',
+    alt: 'One Bedroom Apartment in Ikeja, Lagos bright living area with mezzanine bedroom, kitchen, and dining space',
+    objectPosition: 'object-center',
+  },
+  'two-bedroom-lekki': {
+    src: '/assets/aistudio/Master_Bedroom_Ideas__59_Ways_to_Design_Your_Place_32cb4352.jpg',
+    alt: 'Two Bedroom Apartment in Lekki, Lagos blue upholstered bedroom suite with bedside lamps and floor length curtains',
+    objectPosition: 'object-[center_62%]',
+  },
+  'three-bedroom-surulere': {
+    src: '/assets/aistudio/Best_Home_Decor_Sales_to_Watch_on_Amazon_in_2026_6d70d510.jpg',
+    alt: 'Three Bedroom Apartment in Surulere, Lagos sunlit residential interior with seating area, desk, and kitchen counter',
+    objectPosition: 'object-[center_55%]',
+  },
+  'luxury-serviced-vi': {
+    src: '/assets/aistudio/Oniru_VI_BR_3BA_-_Spacious__Fast_Wifi__Pool__Free_Parking_6da3f726.jpg',
+    alt: 'Luxury Serviced Apartment in Victoria Island, Lagos living room with recessed ceiling lighting, sectional sofa, and marble nesting tables',
+    objectPosition: 'object-center',
+  },
+  'premium-shortlet-ikoyi': {
+    src: '/assets/aistudio/download__2__b46ab0ab.jpg',
+    alt: 'Premium Short Let Apartment in Ikoyi, Lagos double height living area with cream sofas, open kitchen, mezzanine gallery, and illuminated staircase',
+    objectPosition: 'object-[center_65%]',
+  },
+};
+
 export function ApartmentsPage({ onNavigate }: ApartmentsPageProps) {
   const [selectedLocation, setSelectedLocation] = useState<string>('all');
   const [maxPrice, setMaxPrice] = useState<string>('all');
@@ -74,7 +110,7 @@ export function ApartmentsPage({ onNavigate }: ApartmentsPageProps) {
             Apartments Across Lagos
           </h1>
           <p className="mt-4 text-base sm:text-lg text-[#34483D]/80 max-w-2xl leading-relaxed">
-            Browse all six demonstration apartment listings across Yaba, Ikeja, Lekki, Surulere, Victoria Island, and Ikoyi. Listed prices are sample nightly rates subject to availability confirmation.
+            Browse our collection of Lagos residences across Yaba, Ikeja, Lekki, Surulere, Victoria Island and Ikoyi. Listed prices are sample nightly rates subject to availability confirmation.
           </p>
         </div>
       </section>
@@ -201,6 +237,7 @@ export function ApartmentsPage({ onNavigate }: ApartmentsPageProps) {
                   key={apartment.id}
                   apartment={apartment}
                   onNavigate={onNavigate}
+                  coverImage={APARTMENTS_PAGE_COVERS[apartment.id]}
                 />
               ))}
             </div>

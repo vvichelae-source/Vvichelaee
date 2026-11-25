@@ -701,7 +701,7 @@ export function BookingPage({ prefill }: BookingPageProps) {
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-semibold bg-[#B9785C] text-[#F3EDE2] hover:bg-[#34483D] transition-colors"
                     >
                       <MessageCircle className="w-4 h-4" aria-hidden="true" />
-                      <span>Enquire via WhatsApp ({BUSINESS_INFO.whatsappDisplay})</span>
+                      <span>Chat With Us on WhatsApp</span>
                     </a>
                   ) : (
                     <button
@@ -711,7 +711,7 @@ export function BookingPage({ prefill }: BookingPageProps) {
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-semibold bg-[#34483D]/35 text-[#F3EDE2] cursor-not-allowed"
                     >
                       <MessageCircle className="w-4 h-4" aria-hidden="true" />
-                      <span>Enquire via WhatsApp ({BUSINESS_INFO.whatsappDisplay})</span>
+                      <span>Chat With Us on WhatsApp</span>
                     </button>
                   )}
 

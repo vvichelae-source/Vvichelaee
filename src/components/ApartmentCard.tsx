@@ -7,14 +7,21 @@ interface ApartmentCardProps {
   apartment: Apartment;
   onNavigate: (route: PageRoute) => void;
   compact?: boolean;
+  coverImage?: {
+    src: string;
+    alt: string;
+    objectPosition?: string;
+  };
 }
 
 export function ApartmentCard({
   apartment,
   onNavigate,
   compact = false,
+  coverImage,
 }: ApartmentCardProps) {
-  const mainImage = apartment.images[0];
+  const mainImage = coverImage ?? apartment.images[0];
+  const objectPositionClass = coverImage?.objectPosition ?? 'object-center';
 
   return (
     <article className="group flex flex-col h-full bg-[#F3EDE2] border border-[#34483D]/15 transition-colors duration-200 hover:border-[#B9785C]">
@@ -31,7 +38,7 @@ export function ApartmentCard({
           src={mainImage.src}
           alt={mainImage.alt}
           fallbackTitle={apartment.name}
-          className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          className={`w-full h-full object-cover ${objectPositionClass} transition-transform duration-500 ease-out group-hover:scale-105`}
         />
       </a>
 

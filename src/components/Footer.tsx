@@ -100,14 +100,14 @@ export function Footer({ onNavigate }: FooterProps) {
                 href={BUSINESS_INFO.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-[#F3EDE2]/90 hover:text-[#F3EDE2] transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold bg-[#B9785C] text-[#F3EDE2] hover:bg-[#F3EDE2] hover:text-[#34483D] transition-colors"
               >
-                <MessageCircle className="w-4 h-4 text-[#B9785C] shrink-0" aria-hidden="true" />
-                <span>WhatsApp: {BUSINESS_INFO.whatsappDisplay}</span>
+                <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
+                <span>Chat With Us on WhatsApp</span>
               </a>
               <a
                 href={`mailto:${BUSINESS_INFO.email}`}
-                className="flex items-center gap-2.5 text-[#F3EDE2]/90 hover:text-[#F3EDE2] transition-colors"
+                className="flex items-center gap-2.5 text-[#F3EDE2]/90 hover:text-[#F3EDE2] transition-colors pt-1"
               >
                 <Mail className="w-4 h-4 text-[#B9785C] shrink-0" aria-hidden="true" />
                 <span>{BUSINESS_INFO.email}</span>

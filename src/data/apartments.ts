@@ -7,20 +7,21 @@ export const BUSINESS_INFO = {
   descriptor: 'Serviced Apartments • Short-Let Living',
   tagline: 'Feel at Home, Wherever Life Takes You.',
   location: 'Lagos, Nigeria',
-  whatsappDisplay: '08144084281',
   whatsappLink: 'https://wa.me/2348144084281',
   email: 'vvichelae@gmail.com',
 };
 
 export const HERO_IMAGE = {
-  src: '/src/assets/images/hero_lagos_living_1795554197894.jpg',
-  alt: 'Sunlit modern Vvichelae apartment living room in Lagos with linen sofa, warm oak table, olive and terracotta cushions',
+  src: '/assets/aistudio/download__1__ddea9685.jpg',
+  alt: 'Modern Vvichelae Stays & Suites apartment living room with sectional sofa, round marble coffee table, recessed ceiling lighting, framed wall art, and smart TV',
 };
 
 export const VIDEO_SHOWCASES = {
   homeTour: {
-    heading: 'Step Inside Your Next Stay.',
-    subheading: 'A calm walkthrough of living spaces, dining corners, and sunlit bedrooms prepared for your arrival in Lagos.',
+    label: 'A CLOSER LOOK AT VVICHELAE',
+    heading: 'Come In. Get Comfortable. Feel at Home.',
+    subheading:
+      'Take a little tour of the spaces waiting for you. From cosy living rooms to inviting bedrooms, discover a comfortable place to unwind, recharge and feel at home during your stay in Lagos.',
     videoSrc: '/videos/vvichelae-apartment-tour.mp4',
     posterSrc: '/src/assets/images/video_tour_poster_1795554197411.jpg',
     posterAlt: 'Open plan modern serviced apartment in Lagos featuring living room, timber dining table, and bedroom doorway',
@@ -374,7 +375,7 @@ export const FAQS: FaqItem[] = [
     id: 'confirm-availability',
     question: 'How do I confirm apartment availability?',
     answer:
-      'After you send your booking enquiry via our online form or WhatsApp (08144084281), Vvichelae checks the calendar for your chosen apartment and dates and contacts you directly to confirm availability and next steps.',
+      'After you send your booking enquiry via our online form or WhatsApp, Vvichelae checks the calendar for your chosen apartment and dates and contacts you directly to confirm availability and next steps.',
   },
   {
     id: 'wifi-parking',
@@ -392,6 +393,6 @@ export const FAQS: FaqItem[] = [
     id: 'contact-vvichelae',
     question: 'How do I contact Vvichelae?',
     answer:
-      'You can reach Vvichelae directly on WhatsApp at 08144084281, send an email to vvichelae@gmail.com, or submit a message through our Contact and Booking Enquiry pages.',
+      'You can reach Vvichelae directly using our Chat With Us on WhatsApp button, send an email to vvichelae@gmail.com, or submit a message through our Contact and Booking Enquiry pages.',
   },
 ];

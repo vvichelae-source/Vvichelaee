@@ -55,11 +55,11 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
           <div className="lg:col-span-6">
             <div className="aspect-[4/3] overflow-hidden border border-[#34483D]/15">
               <SafeImage
-                src="/src/assets/images/apt6_ikoyi_living_1795554322266.jpg"
-                alt="Warm sunlit Vvichelae apartment interior in Lagos"
+                src="/assets/aistudio/Professional_Real_Estate_Photo_Editing_for_Stunning_Property_Images_5616506f.jpg"
+                alt="Sunlit Vvichelae Stays & Suites open plan living and dining residence opening onto a private courtyard"
                 loading="eager"
                 fallbackTitle="Vvichelae Lagos"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>

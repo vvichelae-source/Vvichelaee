@@ -147,7 +147,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 Chat on WhatsApp
               </h2>
               <p className="text-sm text-[#F3EDE2]/80 leading-relaxed mb-6">
-                Message Vvichelae directly on {BUSINESS_INFO.whatsappDisplay} for quick availability checks and stay enquiries.
+                Message Vvichelae directly on WhatsApp for quick availability checks and stay enquiries.
               </p>
               <a
                 href={BUSINESS_INFO.whatsappLink}
@@ -156,7 +156,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-semibold bg-[#B9785C] text-[#F3EDE2] hover:bg-[#F3EDE2] hover:text-[#34483D] transition-colors"
               >
                 <MessageCircle className="w-4 h-4" aria-hidden="true" />
-                <span>WhatsApp {BUSINESS_INFO.whatsappDisplay}</span>
+                <span>Chat With Us on WhatsApp</span>
               </a>
             </div>
 
